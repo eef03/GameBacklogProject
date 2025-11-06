@@ -19,12 +19,13 @@ CREATE TABLE Users (
 );
 
 CREATE TABLE Game (
-    Game_ID       INT IDENTITY(1,1)   PRIMARY KEY,
+    Game_ID            INT IDENTITY(1,1)   PRIMARY KEY,
     Game_Title         VARCHAR(50)         NOT NULL,
     Game_Release_year  INT                 NOT NULL,
-    Genre_ID    INT                 NOT NULL,
-    Platform_ID  INT                 NOT NULL,
-    Game_Developer     VARCHAR(50)         NOT NULL
+    Genre_ID           INT                 NOT NULL,
+    Platform_ID        INT                 NOT NULL,
+    Game_Developer     VARCHAR(50)         NOT NULL,
+    Game_Description   TEXT                NOT NULL
 );
 
 CREATE TABLE Genre (
@@ -43,8 +44,13 @@ CREATE TABLE BacklogEntry (
     User_ID       INT                NOT NULL,
     Game_ID       INT                NOT NULL,
     Entry_Status  VARCHAR(50)        NOT NULL,
-    Entry_Rating  INT                NOT NULL,
+    Entry_Rating  INT                NULL,
+    Entry_Notes   TEXT               NOT NULL,
     Entry_DateAdded DATETIME         NOT NULL
+);
+
+CREATE TABLE Publisher (
+    Publisher_ID
 );
 
 --Adding Foreign Keys--
@@ -66,4 +72,4 @@ REFERENCES Users(User_ID);
 ALTER TABLE BacklogEntry
 ADD CONSTRAINT FK_BacklogEntry_Game_ID
 FOREIGN KEY(Game_ID)
-REFERENCES Users(Game_ID);
+REFERENCES Game(Game_ID);
